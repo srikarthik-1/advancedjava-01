@@ -1,0 +1,52 @@
+import java.util.Scanner;
+class Advance {
+void welcome() {
+System.out.println("Welcome to Advance Java");
+}
+void send() {
+System.out.println("Hi");
+}
+void receive() {
+System.out.println("Hello Hi");
+}
+void calculation() {
+Scanner sc = new Scanner(System.in);
+System.out.print("Enter first number: ");
+int a = sc.nextInt();
+System.out.print("Enter second number: ");
+int b = sc.nextInt();
+System.out.print("Enter operator (+, -, *, /): ");
+char op = sc.next().charAt(0);
+
+switch (op) {
+case '+':
+System.out.println("Result = " + (a + b));
+break;
+case '-':
+System.out.println("Result = " + (a - b));
+break;
+case '*':
+System.out.println("Result = " + (a * b));
+break;
+case '/':
+if (b != 0)
+System.out.println("Result = " + (a / b));
+else
+System.out.println("Division by zero is not possible.");
+break;
+default:
+System.out.println("Invalid Operator");
+}
+}
+void bye() {
+System.out.println("Bye");
+}
+public static void main(String[] args) {
+Advance obj = new Advance();
+obj.welcome();
+obj.send();
+obj.receive();
+obj.calculation();
+obj.bye();
+}
+}
