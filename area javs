@@ -1,52 +1,46 @@
-import java.util.Scanner;
-class AreaOfShapes {
-    public static void main(String args[]) {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("Choose a Shape:");
-        System.out.println("1. Circle");
-        System.out.println("2. Rectangle");
-        System.out.println("3. Square");
-        System.out.println("4. Triangle");
-
-        System.out.print("Enter your choice: ");
-        int choice = sc.nextInt();
-
-        switch (choice) {
-            case 1:
-                System.out.print("Enter the radius: ");
-                double radius = sc.nextDouble();
-                double circleArea = 3.14159 * radius * radius;
-                System.out.println("Area of Circle = " + circleArea);
-                break;
-
-            case 2:
-                System.out.print("Enter the length: ");
-                double length = sc.nextDouble();
-                System.out.print("Enter the breadth: ");
-                double breadth = sc.nextDouble();
-                double rectangleArea = length * breadth;
-                System.out.println("Area of Rectangle = " + rectangleArea);
-                break;
-
-            case 3:
-                System.out.print("Enter the side: ");
-                double side = sc.nextDouble();
-                double squareArea = side * side;
-                System.out.println("Area of Square = " + squareArea);
-                break;
-
-            case 4:
-                System.out.print("Enter the base: ");
-                double base = sc.nextDouble();
-                System.out.print("Enter the height: ");
-                double height = sc.nextDouble();
-                double triangleArea = 0.5 * base * height;
-                System.out.println("Area of Triangle = " + triangleArea);
-                break;
-
-            default:
-                System.out.println("Invalid Choice!");
-        }
-    }
+import java.util.*;
+class op{
+Scanner sc = new Scanner(System.in);
+int a,b;
+char c;
+void hi(){
+System.out.println("hello");
+}
+void numbers(){
+System.out.println("enter numbers : ");
+ a = sc.nextInt();
+b = sc.nextInt();
+}
+void operator(){
+System.out.println("choose operator(*,+,-,/): ");
+c = sc.next().charAt(0);
+}
+void bye(){
+System.out.println("bye");
+}
+void calculate(){
+switch(c){
+case'+':
+System.out.println(a+b);
+break;
+case'-':
+System.out.println(a-b);
+break;
+case'*':
+System.out.println(a*b);
+break;
+case'/':
+System.out.println(a/b);
+break;
+default:
+System.out.println("invalid operator");
+}
+}
+public static void main(String[] args){
+op obj = new op();
+obj.hi();
+obj.numbers();
+obj.calculate();
+obj.bye();
+}
 }
