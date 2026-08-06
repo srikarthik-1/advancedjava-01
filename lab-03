@@ -1,0 +1,88 @@
+import java.sql.*;
+
+public class JDBCStoredProcDemo {
+
+    public static void main(String[] args) {
+
+        String url = "jdbc:mysql://localhost:3306/testdb";
+        String user = "testuser";
+        String password = "testpass";
+
+        try {
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection conn = DriverManager.getConnection(url, user, password);
+
+            System.out.println("Database connected.");
+
+            CallableStatement insertStmt = conn.prepareCall("{call insert_employee(?, ?, ?)}");
+            insertStmt.setInt(1, 101);
+            insertStmt.setString(2, "John Doe");
+            insertStmt.setDouble(3, 55000.00);
+            insertStmt.execute();
+
+            System.out.println("Record inserted successfully.");
+
+            CallableStatement getSalaryStmt = conn.prepareCall("{call get_salary_by_id(?, ?)}");
+            getSalaryStmt.setInt(1, 101);
+            getSalaryStmt.registerOutParameter(2, Types.DECIMAL);
+            getSalaryStmt.execute();
+
+            double salary = getSalaryStmt.getDouble(2);
+
+            System.out.println("Salary for Employee ID 101 is: " + salary);
+
+            insertStmt.close();
+            getSalaryStmt.close();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+
+
+
+-----------------------------------------------------------------------------------------
+
+CREATE TABLE employee (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50),
+    salary DECIMAL(10,2)
+);
+
+DELIMITER $$
+
+CREATE PROCEDURE insert_employee(
+    IN p_emp_id INT,
+    IN p_emp_name VARCHAR(50),
+    IN p_salary DECIMAL(10,2)
+)
+BEGIN
+    INSERT INTO employee(emp_id, emp_name, salary)
+    VALUES(p_emp_id, p_emp_name, p_salary);
+END$$
+
+CREATE PROCEDURE get_salary_by_id(
+    IN p_emp_id INT,
+    OUT p_salary DECIMAL(10,2)
+)
+BEGIN
+    SELECT salary
+    INTO p_salary
+    FROM employee
+    WHERE emp_id = p_emp_id;
+END$$
+
+DELIMITER ;
+
+
+
+
+
+
+
